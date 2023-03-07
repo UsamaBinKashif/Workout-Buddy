@@ -3,6 +3,7 @@ const {
   handleGetAllDocs,
   handleGetSingleDoc,
   handleAddDoc,
+  handleDeleteDoc,
 } = require("../controller/workout");
 
 
@@ -17,9 +18,7 @@ router.get("/:id", handleGetSingleDoc);
 router.post("/", handleAddDoc);
 
 //Delete Document
-router.delete("/:id", (req, res) => {
-  res.status(200).json("Deleted Workout");
-});
+router.delete("/:id", handleDeleteDoc);
 
 //Update Document
 router.patch("/:id", (req, res) => {
