@@ -1,19 +1,20 @@
 const router = require("express").Router();
+const {
+  handleGetAllDocs,
+  handleGetSingleDoc,
+  handleAddDoc,
+} = require("../controller/workout");
+
+
 
 //All Documents
-router.get("/", (req, res) => {
-  res.status(200).json("All Workouts");
-});
+router.get("/", handleGetAllDocs);
 
 //Single Document
-router.get("/:id", (req, res) => {
-  res.status(200).json("Single Workout");
-});
+router.get("/:id", handleGetSingleDoc);
 
 //Add Document
-router.post("/:id", (req, res) => {
-  res.status(200).json("Added Workout");
-});
+router.post("/", handleAddDoc);
 
 //Delete Document
 router.delete("/:id", (req, res) => {
