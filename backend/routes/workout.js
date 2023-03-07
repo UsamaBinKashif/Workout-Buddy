@@ -4,6 +4,7 @@ const {
   handleGetSingleDoc,
   handleAddDoc,
   handleDeleteDoc,
+  handleUpdateDoc
 } = require("../controller/workout");
 
 
@@ -21,8 +22,6 @@ router.post("/", handleAddDoc);
 router.delete("/:id", handleDeleteDoc);
 
 //Update Document
-router.patch("/:id", (req, res) => {
-  res.status(200).json("Updated Workout");
-});
+router.patch("/:id",handleUpdateDoc);
 
 module.exports = router;

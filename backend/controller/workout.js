@@ -45,6 +45,19 @@ const handleDeleteDoc = async (req, res) => {
   res.status(200).json("Deleted");
 };
 
+const handleUpdateDoc = async (req,res) =>{
+const {id} = req.params;
+if(!mongoose.Types.ObjectId.isValid(id)){
+    res.status(400).json("No such workout");
+}
+const workout = await Workout.findByIdAndUpdate({_id:id},{
+    ...req.body
+})
+if (!workout) {
+    return res.status(400).json("No such workout");
+  }
+  res.status(200).json(workout);
 
+}
 
 module.exports = { handleAddDoc, handleGetAllDocs, handleGetSingleDoc,handleDeleteDoc };
