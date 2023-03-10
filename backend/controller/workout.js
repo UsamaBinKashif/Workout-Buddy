@@ -15,7 +15,7 @@ const handleGetSingleDoc = async (req, res) => {
     return res.status(400).json("No such workout");
   }
 
-  const workout = await Workout.findById({_id:id});
+  const workout = await Workout.findById({ _id: id });
 
   if (!workout) {
     return res.status(400).json("No such workout");
@@ -45,19 +45,28 @@ const handleDeleteDoc = async (req, res) => {
   res.status(200).json("Deleted");
 };
 
-const handleUpdateDoc = async (req,res) =>{
-const {id} = req.params;
-if(!mongoose.Types.ObjectId.isValid(id)){
+const handleUpdateDoc = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     res.status(400).json("No such workout");
-}
-const workout = await Workout.findByIdAndUpdate({_id:id},{
-    ...req.body
-})
-if (!workout) {
+  }
+  const workout = await Workout.findByIdAndUpdate(
+    { _id: id },
+    {
+      ...req.body,
+    },
+    { new: true }
+  );
+  if (!workout) {
     return res.status(400).json("No such workout");
   }
   res.status(200).json(workout);
+};
 
-}
-
-module.exports = { handleAddDoc, handleGetAllDocs, handleGetSingleDoc,handleDeleteDoc };
+module.exports = {
+  handleAddDoc,
+  handleGetAllDocs,
+  handleGetSingleDoc,
+  handleDeleteDoc,
+  handleUpdateDoc,
+};
