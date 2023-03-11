@@ -1,10 +1,27 @@
-const Home = () => {
+import { useEffect, useState } from "react";
 
-    return (
-      <div className="home">
-        <h2>Home</h2>
+const Home = () => {
+  const [workouts, setWorkouts] = useState(null);
+  useEffect(() => {
+    const getWorkouts = async () => {
+      const response = await fetch("http://localhost:8080/api/workout/");
+      const json = await response.json();
+
+      if (response.ok) {
+        setWorkouts(json);
+      }
+    };
+    getWorkouts();
+  }, []);
+
+  return (
+    <div className="home">
+      <div className="workouts">
+        {workouts &&
+          workouts.map((workout) => <h1 key={workout._id}>{workout.title}</h1>)}
       </div>
-    )
-  }
-  
-  export default Home
+    </div>
+  );
+};
+
+export default Home;
